@@ -1,0 +1,18 @@
+FROM qwen2.5-coder:0.5b
+
+# Lower temperature is better for code accuracy
+PARAMETER temperature 0.0
+PARAMETER stop "```"
+
+# Specialized template for Qwen-based models
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+"""
+
+SYSTEM """You are a coder python. 
+Return ONLY clean Python code. 
+aways explanations. aways conversational filler. 
+"""

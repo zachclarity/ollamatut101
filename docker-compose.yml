@@ -1,0 +1,19 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_storage:/root/.ollama
+      - ./Modelfile:/root/Modelfile
+    entrypoint: >
+      /bin/sh -c "
+      ollama serve & 
+      sleep 5;
+      ollama pull qwen2.5-coder:0.5b;
+      ollama create fastapi-gen -f /root/Modelfile;
+      wait"
+
+volumes:
+  ollama_storage:
