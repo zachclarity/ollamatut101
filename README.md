@@ -1,5 +1,75 @@
 # ollamatut101
+
+## 📚 **Official Documentation & Reference Guides**
+
+### **Ollama & Embeddings**
+
+* ⭐ **Ollama Embedding Models Guide** — Official walkthrough for generating embeddings as part of a RAG pipeline. [Ollama: Embedding Models & RAG Examples](https://ollama.com/blog/embedding-models?utm_source=chatgpt.com)
+* 🧠 **Ollama with LangChain** — Integration docs describing how Ollama connects into LangChain workflows. [LangChain Ollama Integration (Python)](https://docs.langchain.com/oss/python/integrations/text_embedding/ollama?utm_source=chatgpt.com)
+
+### **ChromaDB & Vector Stores**
+
+* 🚀 **Chroma Vector Store with LangChain** — Official guide on installing and using Chroma with LangChain. [Chroma Vector Store Docs in LangChain](https://docs.langchain.com/oss/python/integrations/vectorstores/chroma?utm_source=chatgpt.com)
+* 📌 **Chroma + Ollama Integration** — Embedding function docs showing how to connect with Ollama’s embedding API. [Chroma Docs: Ollama Integration](https://docs.trychroma.com/integrations/embedding-models/ollama?utm_source=chatgpt.com)
+
+### **LangChain & RAG**
+
+* 🦜 **LangChain RAG Agent Tutorial** — Step-by-step guide to building an RAG agent in LangChain. [LangChain RAG Agent Tutorial](https://docs.langchain.com/oss/python/langchain/rag?utm_source=chatgpt.com)
+* 📊 **Embedding Model Concepts** — Core concepts of embedding models & similarity search used in RAG. [LangChain Embedding Docs](https://docs.langchain.com/oss/python/integrations/text_embedding?utm_source=chatgpt.com)
+
+### **High-Level Concepts**
+
+* 📖 **RAG (Retrieval Augmented Generation)** — Wikipedia overview of RAG architecture & key stages (index → retrieve → augment → generate). [RAG (Retrieval‑Augmented Generation) Overview](https://en.wikipedia.org/wiki/Retrieval-augmented_generation?utm_source=chatgpt.com)
+* 🔗 **LangChain Background** — Wikipedia page on the LangChain framework’s capabilities around LLMs and RAG. [LangChain (Wiki)](https://en.wikipedia.org/wiki/LangChain?utm_source=chatgpt.com)
+
 ---
+
+## 🧠 **Tutorials & Practical Walkthroughs**
+
+### **End-to-End Guides**
+
+* 📘 **Build a Local RAG Chatbot (Medium)** — Step-by-step guide using Chroma, LangChain, & Ollama. [Local RAG Chatbot (Chroma + LangChain + Ollama)](https://medium.com/%40Shamimw/building-a-local-rag-based-chatbot-using-chromadb-langchain-and-streamlit-and-ollama-9410559c8a4d?utm_source=chatgpt.com)
+* ⚙️ **Hands-on LangChain + Ollama + Chroma RAG** — Example showing how to load, query, and generate content. [RAG with LangChain + Ollama + Chroma (Medium)](https://medium.com/%40arunpatidar26/how-to-implement-rag-with-chromadb-and-ollama-a-python-guide-for-beginners-30857499d0a0?utm_source=chatgpt.com)
+* ☁️ **Build a RAG App from Scratch (dev.to)** — Practical tutorial for creating a local RAG application with Python & Ollama. [Build Your Own RAG App: Step‑by‑Step](https://dev.to/nassermaronie/build-your-own-rag-app-a-step-by-step-guide-to-setup-llm-locally-using-ollama-python-and-chromadb-b12?utm_source=chatgpt.com)
+* 🪄 **Simple RAG using Ollama & LangChain** — Starter post showing the basic RAG components and flow. [Simple RAG using Ollama + LangChain + Chroma](https://dev.to/arjunrao87/simple-wonders-of-rag-using-ollama-langchain-and-chromadb-2hhj?utm_source=chatgpt.com)
+
+### **Starter & Example Notebooks**
+
+* 📓 **GitHub Example: RAG with Ollama + Chroma + Gemma** — Code notebook implementing a complete RAG system. [RAG with Ollama + Chroma + Gemma 7B Notebook](https://github.com/deeepsig/rag-ollama/blob/main/rag-using-langchain-chromadb-ollama-and-gemma-7b.ipynb?utm_source=chatgpt.com)
+
+### **Alternative Approach Tutorials**
+
+* 🧪 **Local RAG with Ollama’s Gemma 2** — Another practical local RAG build (Hashnode). [Local RAG with Ollama’s Gemma 2 & LangChain.dart](https://henryadu.hashnode.dev/step-by-step-guide-to-local-rag-with-ollamas-gemma-2-and-langchaindart?utm_source=chatgpt.com)
+* 🔍 **General RAG Tutorial (Leanware)** — Practical intro to RAG from scratch. [LangChain RAG Tutorial (Leanware)](https://www.leanware.co/insights/langchain-rag-tutorial-build-retrieval-augmented-generation-from-scratch?utm_source=chatgpt.com)
+
+---
+
+## 🧠 **Research Papers & Whitepapers**
+
+These are *academic/technical references* on Retrieval-Augmented Generation (RAG) and vector search architectures that underpin Ollama + Chroma + orchestration frameworks:
+
+### **RAG Advancements & Vector Indexing**
+
+* 📊 **HybridRAG: Vector + Knowledge Graphs** — Combines KG with vector retrieval for improved Q&A. [HybridRAG (arXiv 2024)](https://arxiv.org/html/2408.04948v1?utm_source=chatgpt.com)
+* 📈 **Vector Index Partitioning for High-Performance RAG** — Efficient vector retrieval for low latency. [Adaptive Vector Index Partitioning for RAG (arXiv)](https://arxiv.org/abs/2504.08930?utm_source=chatgpt.com)
+
+### **Embedding Improvements & Retrieval Quality**
+
+* 🧠 **HEAL: Better Embedding Alignment for Retrieval** — Improves embedding relevance for domain-specific retrieval. [HEAL: Hierarchical Embedding Alignment Loss (arXiv)](https://arxiv.org/abs/2412.04661?utm_source=chatgpt.com)
+* 🌐 **ConceptFormer — Vector KG Embeddings for LLMs** — Embedding semantics from knowledge graphs directly into vector space. [ConceptFormer (arXiv 2025)](https://arxiv.org/abs/2504.07624?utm_source=chatgpt.com)
+* ⚖️ **Poly-Vector Retrieval in Legal Documents** — Multi-vector embeddings for better retrieval accuracy. [Poly‑Vector Retrieval (arXiv)](https://arxiv.org/abs/2504.10508?utm_source=chatgpt.com)
+
+---
+
+## 🧾 **Supplemental References**
+
+These are *supportive resources* that help you understand the context and technology behind the core stack:
+
+* 📘 **Prompt Engineering Overview (Wikipedia)** — Explains how RAG fits into prompt engineering. [Prompt Engineering (Wiki)](https://en.wikipedia.org/wiki/Prompt_engineering?utm_source=chatgpt.com)
+* ☁️ **Vector DB Scaling (Milvus Wiki)** — Example of alternative vector databases you might use in rich RAG systems. [Milvus Vector Database Overview](https://en.wikipedia.org/wiki/Milvus_%28vector_database%29?utm_source=chatgpt.com)
+
+---
+
 
 # Ollama Use Cases & Examples with ChromaDB and LangChain (Updated)
 
