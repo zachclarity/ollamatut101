@@ -96,12 +96,9 @@ if __name__ == "__main__":
     index_code(target)
     
     # Only run test query if no specific path was provided (standard run)
-    if len(sys.argv) == 1:
-        print("\nTest Query: How is the system structured?")
-        print("Result:", query_code("How is the system structured?"))
-    # Example queries to test the new files
-        print("\nResult (general):", query_code("List all python files"))
+    if len(sys.argv) == 1:       
         print("\nResult (Terraform):", query_code("What S3 bucket is defined?"))
         print("\nResult (GitLab):", query_code("What happens in the test stage?"))
         print("\nResult (Java):", query_code("show Java Calls"))
         print("\nResult (Javascript):", query_code("show Javascript Calls"))
+        print("Result:", query_code("How is the docker composed structured?"))

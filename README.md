@@ -174,7 +174,15 @@ A common improvement to the logic in your `one.py` is adding a **chunk overlap**
 
 # Example Run 
 
-## > python one.py
+## Docker run
+
+```
+docker compose run --rm backend python one.py
+```
+
+## Command  Local 
+
+- > python one.py
 ```
 --- Starting indexing for: ./ ---
 
