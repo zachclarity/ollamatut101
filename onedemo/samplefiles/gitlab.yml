@@ -1,0 +1,9 @@
+stages:
+  - build
+  - test
+
+security_scan:
+  stage: test
+  script:
+    - echo "Running security scan..."
+    - exit 0
