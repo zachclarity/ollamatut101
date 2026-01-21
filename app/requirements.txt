@@ -7,6 +7,7 @@ jinja2
 langchain
 langchain-community
 langchain-core
+langchain-text-splitters
 
 # LangChain Integrations
 langchain-ollama
@@ -17,3 +18,4 @@ langchain-chroma
 chromadb
 beautifulsoup4
 python-multipart
+sqlite3
