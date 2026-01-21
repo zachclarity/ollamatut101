@@ -170,3 +170,39 @@ If chunks are too large, the "noise" (irrelevant code) surrounding the relevant 
 ## Optimization Tip: Adding "Overlap"
 
 A common improvement to the logic in your `one.py` is adding a **chunk overlap**. This means if Chunk A ends at character 1500, Chunk B might start at character 1300. This 200-character overlap ensures that a function definition or a critical comment doesn't get cut in half between two chunks.
+
+
+# Example Run 
+
+## > python one.py
+```
+--- Starting indexing for: ./ ---
+
+Processing: ./one.py
+Processing: ./samplefiles/hellol.js
+Processing: ./samplefiles/terrademo.tf
+Processing: ./samplefiles/App.java
+
+Test Query: How is the system structured?
+
+Result:  The system is structured as follows:
+
+
+1. **Data Collection**: It indexes code from various sources (Python, Java, Javascript, GitLab CI files, Terraform files) by breaking them into smaller chunks, generating embeddings using Ollama's embedding model for each chunk, and storing the data in a ChromaDB collection.
+
+
+2. **Querying**: To query the indexed data, it generates embeddings for user queries using the same Ollama model. It then uses these embeddings to search for the top 3 most relevant chunks in the ChromaDB collection.
+
+
+3. **Response Generation**: The most relevant context found is then used as input for another LLM model (Mistral) to generate a response to the user query.
+
+
+The system can be run either by providing a specific directory or file path as command-line arguments, or by running it without any arguments which will index all files in the current directory and allow you to test queries from the console.
+
+
+Result (general):  The code provided is a Python script that uses Ollama, ChromaDB, and GitLab CI to index various code files (Python, Java, JavaScript, Terraform configurations, and GitLab CI YAML/YML files) and create a vector database for querying the contents.
+
+
+To list all Python files in a given directory or folders, you can modify the `index_code` function to print the file names as follows:
+
+```
