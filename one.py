@@ -3,62 +3,70 @@ import chromadb
 import ollama
 
 # --- Configuration ---
-CHROMA_PATH = "code_db"
-COLLECTION_NAME = "python_codebase"
+CHROMA_PATH = "code_db_mistral"
+COLLECTION_NAME = "mistral_codebase"
 EMBED_MODEL = "nomic-embed-text"
 LLM_MODEL = "mistral"
+CHUNK_SIZE = 1500  # Characters per chunk (adjust as needed)
 
-# Initialize ChromaDB client
 client = chromadb.PersistentClient(path=CHROMA_PATH)
 collection = client.get_or_create_collection(name=COLLECTION_NAME)
 
+def get_chunks(text, size):
+    """Splits a string into smaller chunks."""
+    return [text[i:i + size] for i in range(0, len(text), size)]
+
 def index_code(directory):
-    """Recursively reads python files and adds them to ChromaDB."""
-    for root, _, files in os.walk(directory):
+    ignored_dirs = {'.git', 'venv', '__pycache__', 'code_db_mistral'}
+    
+    for root, dirs, files in os.walk(directory):
+        dirs[:] = [d for d in dirs if d not in ignored_dirs]
+        
         for file in files:
             if file.endswith(".py"):
                 path = os.path.join(root, file)
-                with open(path, "r", encoding="utf-8") as f:
-                    code_content = f.read()
+                print(f"Processing: {path}")
+                
+                try:
+                    with open(path, "r", encoding="utf-8") as f:
+                        content = f.read()
                     
-                    # Create a unique ID for the file
-                    file_id = path.replace("/", "_")
+                    # Split large files into manageable chunks
+                    chunks = get_chunks(content, CHUNK_SIZE)
                     
-                    # Generate embedding using Ollama
-                    response = ollama.embeddings(model=EMBED_MODEL, prompt=code_content)
-                    embedding = response["embedding"]
-                    
-                    # Store in ChromaDB
-                    collection.add(
-                        ids=[file_id],
-                        embeddings=[embedding],
-                        documents=[code_content],
-                        metadatas=[{"source": path}]
-                    )
-    print(f"Successfully indexed files from {directory}")
+                    for i, chunk in enumerate(chunks):
+                        # Generate unique ID for each chunk
+                        chunk_id = f"{path}_chunk_{i}"
+                        
+                        # Get embedding from Ollama
+                        response = ollama.embeddings(model=EMBED_MODEL, prompt=chunk)
+                        
+                        collection.add(
+                            ids=[chunk_id],
+                            embeddings=[response["embedding"]],
+                            documents=[chunk],
+                            metadatas=[{"source": path, "chunk_index": i}]
+                        )
+                except Exception as e:
+                    print(f"Failed to index {path}: {e}")
 
 def query_code(user_query):
-    """Finds relevant code and generates a response via Ollama."""
-    # 1. Embed the user query
     query_embed = ollama.embeddings(model=EMBED_MODEL, prompt=user_query)["embedding"]
     
-    # 2. Retrieve the top 2 most relevant snippets from Chroma
-    results = collection.query(query_embeddings=[query_embed], n_results=2)
-    context = "\n\n".join(results["documents"][0])
+    # Query for the top 3 most relevant chunks
+    results = collection.query(query_embeddings=[query_embed], n_results=3)
     
-    # 3. Use Ollama to generate an answer based on the code context
-    prompt = f"Using the following code context, answer the question.\n\nContext:\n{context}\n\nQuestion: {user_query}"
+    # Combine the found snippets into one context block
+    context = "\n---\n".join(results["documents"][0])
     
-    output = ollama.generate(model=LLM_MODEL, prompt=prompt)
-    return output["response"]
+    prompt = f"[INST] Use the code snippets below to answer: {user_query}\n\nContext:\n{context} [/INST]"
+    
+    response = ollama.generate(model=LLM_MODEL, prompt=prompt)
+    return response["response"]
 
-# --- Execution ---
 if __name__ == "__main__":
-    # 1. Index your local code (replace 'path/to/your/code' with your actual directory)
-    # index_code("./my_project") 
-
-    # 2. Query the system
-    question = "How does the database connection work in this project?"
-    answer = query_code(question)
+    # Index current directory
+    index_code("./")
     
-    print(f"\n--- AI RESPONSE ---\n{answer}")
+    # Test a query
+    print("\nResult:", query_code("How is the main entry point structured?"))

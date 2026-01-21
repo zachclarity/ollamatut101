@@ -1,4 +1,32 @@
 # ollamatut101
+
+Example app
+python3 one.py
+Processing: ./one.py
+Processing: ./server.py
+Processing: ./gencode.py
+Processing: ./buildindex.py
+Processing: ./app/main.py
+
+Result:  The main entry point is structured as a FastAPI application with two routes (`/` and `/generate`).
+
+1. The root route (`/`) serves an HTML file with a template engine (Jinja2) when accessed at the base URL (http://localhost:YOUR_PORT).
+
+2. The `/generate` route accepts user input and uses it to query the indexed data using the created retrieval chain. It then generates a response using the loaded LLM model and returns the result as Python code.
+
+Before serving, the application loads, initializes, and indexes the required data:
+- Loads and indices HTML files from the current directory (`./`) using BSHTMLLoader.
+- Initializes an Ollama Embeddings object for generating embeddings for user queries.
+- Initializes a ChatOllama model to generate responses based on the embeddings and the indexed data.
+- Uses Chroma to create a vectorstore from the loaded HTML files with provided embeddings.
+- Creates a prompt template for generating Python code.
+- Constructs a documents chain using create_stuff_documents_chain.
+- Stores the created retrieval chain in app_state for later use (in routes).
+
+On shutdown, it cleans up by removing items from app_state.
+
+# Details
+
 Below is a **clear, progressive learning roadmap** for understanding and building **local RAG systems with Ollama + ChromaDB + LangChain**, including the **“LEGO-style code generation”** pattern you’re targeting.
 It’s designed so someone can go from *zero → production-grade local AI system*.
 

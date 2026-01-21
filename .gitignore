@@ -138,5 +138,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 spring-boot-app
-app/__pycache__/main.cpython-313.pyc
-code_db/chroma.sqlite3
+app/
+code_db/
+code_db_mistral/
