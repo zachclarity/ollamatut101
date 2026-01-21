@@ -141,3 +141,4 @@ spring-boot-app
 app/
 code_db/
 code_db_mistral/
+.DS_Store
